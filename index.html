@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<title>Just Us ❤️</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial;
+  text-align: center;
+  background: linear-gradient(to top, #2b0a14, #4a0f1f);
+  color: #fff;
+  overflow-x: hidden;
+}
+
+h1,h2{
+  text-shadow:0 0 15px rgba(255,255,255,.4);
+}
+
+.hidden {display: none;}
+
+button {
+  padding: 10px 18px;
+  margin: 6px;
+  background: #7a1f3d;
+  border: none;
+  color: white;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 0.3s;
+  box-shadow:0 5px 15px rgba(0,0,0,.4);
+}
+
+button:hover {
+  transform: scale(1.08);
+  background: #a12b52;
+}
+
+#pass{
+  width:220px;
+  padding:14px;
+  border:none;
+  outline:none;
+
+  background:#f5e6c8;
+  color:#3b1f12;
+
+  border:4px solid #8b6a3f;
+  border-radius:8px;
+
+  font-size:20px;
+  font-family:Georgia, serif;
+  text-align:center;
+
+  box-shadow:
+  inset 0 0 15px rgba(0,0,0,.25),
+  0 0 15px rgba(0,0,0,.4);
+
+  background-image:
+  linear-gradient(
+    to bottom,
+    rgba(0,0,0,.05) 1px,
+    transparent 1px
+  );
+
+  background-size:100% 30px;
+}
+
+img {
+  width: 160px;
+  border-radius: 15px;
+  margin: 8px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+}
+
+/* ❤️ hearts */
+.heart {
+  position: fixed;
+  bottom: -10px;
+  animation: float 7s linear infinite;
+  color: rgba(255,180,200,0.7);
+}
+
+@keyframes float {
+  0% {transform: translateY(0);}
+  100% {transform: translateY(-100vh);}
+}
+
+#timer{
+  font-size:24px;
+  margin:0;
+  font-family:Georgia, serif;
+  font-weight:bold;
+  text-shadow:1px 1px 1px rgba(255,255,255,.4);
+}
+
+/* 💬 typing */
+#typedText{
+  width:80%;
+  max-width:700px;
+  margin:auto;
+  min-height:250px;
+  white-space:pre-wrap;
+  line-height:2;
+
+  background:#f5e6c8;
+  color:#3b1f12;
+
+  padding:30px;
+
+  border-radius:12px;
+
+  border:4px solid #d4b483;
+
+  box-shadow:0 0 30px rgba(0,0,0,.4);
+
+  font-family:Georgia, serif;
+
+  text-align:right;
+}
+
+/* 💭 moment */
+.moment {
+  margin-top: 20px;
+  padding: 15px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 15px;
+}
+.book-container{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+}
+
+.book{
+width:320px;
+height:450px;
+perspective:1000px;
+}
+
+.book-cover{
+ width:100%;
+ height:100%;
+
+ background-image:url("book-cover.png");
+ background-size:cover;
+ background-position:center;
+
+ border-radius:15px;
+ box-shadow:0 0 40px rgba(0,0,0,.5);
+
+ display:flex;
+ flex-direction:column;
+ justify-content:center;
+ align-items:center;
+
+ padding:20px;
+
+ transition:1.5s;
+ position:relative;
+}
+
+.book.open .book-cover{
+transform:rotateY(-145deg);
+transform-origin:left;
+}
+
+.lock{
+position:absolute;
+right:20px;
+top:50%;
+transform:translateY(-50%);
+font-size:70px;
+text-shadow:0 0 20px rgba(0,0,0,.7);
+}
+.book-cover p{
+  font-size:22px;
+  font-family:Georgia, serif;
+  text-shadow:0 0 10px rgba(255,255,255,.3);
+}
+.gallery-grid{
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+}
+
+.gallery-grid img{
+transform:rotate(-2deg);
+transition:.3s;
+}
+
+.gallery-grid img:hover{
+transform:scale(1.1);
+}
+
+.counter-box{
+  background:#f5e6c8;
+  color:#3b1f12;
+
+  padding:20px 35px;
+  margin:20px auto;
+
+  width:fit-content;
+  min-width:250px;
+
+  border:4px solid #d4b483;
+  border-radius:12px;
+
+  box-shadow:0 0 25px rgba(0,0,0,.5);
+
+  font-family:Georgia, serif;
+
+  background-image:
+  linear-gradient(
+    to bottom,
+    rgba(0,0,0,.05) 1px,
+    transparent 1px
+  );
+
+  background-size:100% 35px;
+}
+.book-page{
+
+background:#f5e6c8;
+color:#3b1f12;
+
+width:80%;
+max-width:700px;
+
+margin:auto;
+
+padding:25px;
+
+text-align:right;
+line-height:2;
+
+border-radius:12px;
+
+border:4px solid #d4b483;
+
+box-shadow:0 0 25px rgba(0,0,0,.4);
+
+background-image:
+linear-gradient(
+to bottom,
+rgba(0,0,0,.05) 1px,
+transparent 1px
+);
+
+background-size:100% 35px;
+
+}
+
+.book-page img{
+
+width:250px;
+max-width:90%;
+
+border-radius:12px;
+
+box-shadow:0 0 20px rgba(0,0,0,.25);
+
+}
+</style>
+
+</head>
+
+<body>
+
+<!-- 🔐 LOGIN -->
+<div id="login" class="book-container">
+
+<div class="book" id="book">
+
+<div class="book-cover">
+
+<h1>📖 Our Story</h1>
+
+<div class="lock" id="lock">🔒</div>
+
+<input type="password" id="pass">
+
+<br><br>
+
+<button onclick="checkPass()">🗝️ Unlock</button>
+
+<p>كل قصة جميلة ليها بداية ❤️</p>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ❤️ MAIN -->
+<div id="main" class="hidden">
+
+  <h2>Hey... 💔</h2>
+
+  <p>احيانا ممكن نتخانق, بس دايما لازم نفتكر الحلو اللي بيننا ❤️</p>
+
+  <div class="counter-box">
+<p id="timer"></p>
+</div>
+
+  <button onclick="showMessage()">💌 رسالة</button>
+  <button onclick="showGallery()">📸 ذكريات</button>
+  <button onclick="showMoment()">💭 Moment</button>
+  <button onclick="startGame()">🎮 لعبة</button>
+  <button onclick="showSecret()">🔐 رسالة سرية</button>
+  <br><br>
+
+  <audio controls>
+    <source src="music.mp3" type="audio/mpeg">
+  </audio>
+</div>
+
+<!-- 💌 MESSAGE -->
+<div id="message" class="hidden">
+  <h2>📜 رسالة من القلب</h2>
+
+  <div id="typedText"></div>
+
+  <button onclick="goBack()">رجوع</button>
+</div>
+
+<!-- 📸 GALLERY -->
+<div id="gallery" class="hidden">
+  <h2>📸 ذكرياتنا</h2>
+
+  <div class="gallery-grid">
+
+ <img src="1.jpg" onclick="openImage(this.src)">
+ <img src="2.jpg" onclick="openImage(this.src)">
+ <img src="3.jpg" onclick="openImage(this.src)">
+ <img src="4.jpg" onclick="openImage(this.src)">
+ <img src="5.jpg" onclick="openImage(this.src)">
+
+</div>
+
+  <br>
+  <button onclick="goBack()">رجوع</button>
+</div>
+
+<!-- 💭 MOMENT -->
+<div id="moment" class="hidden">
+
+<h2>📖 Moment Book</h2>
+
+<div class="book-page" id="page1">
+
+<img src="moment1.jpg">
+
+<p>
+ا
+دايما كنت بفتكر هل ممكن اطلع القمر؟ 💖
+</p>
+
+</div>
+
+<div class="book-page hidden" id="page2">
+
+<img src="moment2.jpg">
+
+<p>
+بس لاقيت اني مش محتاج اطلع لأني لقيت القمر نفسه ❤️
+</p>
+
+</div>
+
+<br>
+
+<button onclick="prevPage()">⬅️ السابق</button>
+
+<button onclick="nextPage()">التالي ➡️</button>
+
+<button onclick="goBack()">رجوع</button>
+
+</div>
+
+<div id="secret" class="hidden">
+
+  <h2>🔐 رسالة سرية</h2>
+
+<div class="book-page">
+
+<p>
+هي الحياة ايه غير اتنين بيبهتوا علي بعض
+وبتجمعهم الدنيا عشان يهونوا علي بعض..فخلي بالك مني بقي
+ ❤️
+</p>
+
+</div>
+
+  <br>
+
+  <button onclick="goBack()">رجوع</button>
+
+</div>
+<!-- 🎮 GAME -->
+<div id="game" class="hidden">
+  <h2>اختار القلب الصح ❤️</h2>
+
+  <div id="heartsGame"></div>
+
+  <br>
+  <button onclick="goBack()">رجوع</button>
+</div>
+
+<script>
+
+// 🔐 LOGIN
+function checkPass() {
+
+let pass = document.getElementById("pass").value.trim();
+
+if(pass === "love2021"){
+
+document.getElementById("lock").innerHTML = "🔓";
+
+document.getElementById("book").classList.add("open");
+
+setTimeout(()=>{
+
+document.getElementById("login").style.display="none";
+
+document.getElementById("main").style.display="block";
+
+startHearts();
+
+startCounter();
+
+},1500);
+
+}else{
+
+alert("مش ده 😅");
+
+}
+
+}
+// 💌 MESSAGE (typing)
+function showMessage() {
+  hideAll();
+  document.getElementById("message").style.display = "block";
+
+  let text = `السلام على من احبها قلبي وتمنت عيناي أن لو ظلت طوال العمر
+ تنظر إليها لا تفعل سوا النظر إليها ليهدأ قلبي ويذاب شوقه فوالله اشتاق قلبي لرؤية حبيبتي ومل من البعد عنه 
+..فوجود حبيبتي هو خير الوجود ومجالسة حبيبتي هو خير الجلوس.
+. فأنتي حبيبتي وهل للقلب أن ينبض دون أن يطمئن لوجود خليلته..
+حفظك الله يا خليلة قلبي وجمعني بك على خير في حلاله إن شاء الله
+..فعسى أن تصيبنا إحدى دعواتي وتمتلئ الحياة فرحة وسعادة لقربك مني 
+..جعلك الله اقرب الأقربين يا غذاء روحي..انتي حبيبتي وأنا امانك يا رحومتي ♥️🦆`;
+
+  let i = 0;
+  document.getElementById("typedText").innerHTML = "";
+
+  let typing = setInterval(() => {
+    document.getElementById("typedText").innerHTML += text[i];
+    i++;
+    if (i >= text.length) clearInterval(typing);
+  }, 30);
+}
+
+// 📸
+function showGallery() {
+  hideAll();
+  document.getElementById("gallery").style.display = "block";
+}
+
+// 💭 MOMENT
+function showMoment() {
+
+  hideAll();
+
+  currentPage = 1;
+
+  document.getElementById("page1").style.display = "block";
+  document.getElementById("page2").style.display = "none";
+
+  document.getElementById("moment").style.display = "block";
+
+}
+
+// 🎮 GAME
+function startGame() {
+  hideAll();
+  document.getElementById("game").style.display = "block";
+
+  let container = document.getElementById("heartsGame");
+  container.innerHTML = "";
+
+  let correct = Math.floor(Math.random() * 6);
+
+  for (let i = 0; i < 6; i++) {
+    let btn = document.createElement("button");
+    btn.innerHTML = "❤️";
+
+    btn.onclick = function() {
+      if (i === correct) {
+       alert("♥️♥️صح 🥳 مش دايما الخناق معناه اني مش بحبك, خليكي فاكرة اني دايما بحبك وامانك ❤️");
+      } else {
+        alert("حاول تاني 😅");
+      }
+    };
+
+    container.appendChild(btn);
+  }
+}
+
+// 🔙
+function goBack() {
+  hideAll();
+  document.getElementById("main").style.display = "block";
+}
+
+function hideAll() {
+  document.getElementById("main").style.display = "none";
+  document.getElementById("message").style.display = "none";
+  document.getElementById("gallery").style.display = "none";
+  document.getElementById("moment").style.display = "none";
+  document.getElementById("game").style.display = "none";
+  document.getElementById("secret").style.display = "none";
+}
+
+let currentPage = 1;
+
+function nextPage(){
+
+if(currentPage === 1){
+
+document.getElementById("page1").style.display = "none";
+
+document.getElementById("page2").style.display = "block";
+
+currentPage = 2;
+
+}
+
+}
+
+function prevPage(){
+
+if(currentPage === 2){
+
+document.getElementById("page2").style.display = "none";
+
+document.getElementById("page1").style.display = "block";
+
+currentPage = 1;
+
+}
+
+}
+function showSecret(){
+
+hideAll();
+
+document.getElementById("secret").style.display = "block";
+
+}
+// ❤️ HEARTS
+function startHearts() {
+  setInterval(() => {
+    let heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "💖";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = Math.random() * 18 + 10 + "px";
+
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 7000);
+  }, 300);
+}
+
+// ⏳ COUNTER
+function startCounter() {
+  var startDate = new Date("2024-06-29");
+
+  setInterval(function() {
+    var now = new Date();
+
+    var years = now.getFullYear() - startDate.getFullYear();
+    var months = now.getMonth() - startDate.getMonth();
+    var days = now.getDate() - startDate.getDate();
+
+    if (days < 0) { months--; days += 30; }
+    if (months < 0) { years--; months += 12; }
+
+    document.getElementById("timer").innerHTML =
+      "💖 مع بعض بقالنا " +
+      years + " سنة و " +
+      months + " شهر و " +
+      days + " يوم";
+  }, 1000);
+}
+function openImage(src){
+
+let viewer = document.getElementById("imageViewer");
+
+document.getElementById("bigImage").src = src;
+
+viewer.style.display = "flex";
+
+viewer.onclick = function(){
+
+viewer.style.display = "none";
+
+};
+
+}
+</script>
+
+<div id="imageViewer" style="
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,.9);
+display:none;
+justify-content:center;
+align-items:center;
+z-index:9999;
+">
+
+<img id="bigImage"
+style="
+max-width:90%;
+max-height:90%;
+border-radius:15px;
+">
+
+</div>
+</body>
+</html>
